@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
-    "target": "es2019",
-    "module": "commonjs",
-    "strict": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "es5",
     "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true
+    "allowJs": true,
+    "module": "commonjs",
+    "sourceMap": true,
+    "jsx": "react",
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "./dist",
+    "skipLibCheck": true,
+    "strict": true,
   },
   "include": [
-    "src/"
+    "src/**/*"
   ],
   "exclude": [
     "dist",
