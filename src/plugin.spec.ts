@@ -1,12 +1,12 @@
 import type { Config } from 'payload/config'
 import { defaults } from 'payload/dist/config/defaults'
 
-import { plugin } from './plugin'
+import { samplePlugin } from './plugin'
 
 describe('plugin', () => {
   // Create tests to ensure expected behaviour from the plugin
   it('should run the plugin', () => {
-    const runPlugin = plugin({ enabled: true })
+    const runPlugin = samplePlugin({ enabled: true })
     const config = runPlugin(createConfig())
 
     assertPluginRan(config)

@@ -10,7 +10,7 @@ import { extendWebpackConfig } from './webpack'
 // globals
 
 
-export const plugin =
+export const samplePlugin =
   (pluginOptions: PluginTypes) =>
   (incomingConfig: Config): Config => {
     let config = { ...incomingConfig }
