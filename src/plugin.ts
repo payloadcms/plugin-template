@@ -4,27 +4,10 @@ import { onInitExtension } from './onInitExtension'
 import type { PluginTypes } from './types'
 import { extendWebpackConfig } from './webpack'
 
-// This is the main plugin function
-// collections
-// endpoints
-// globals
-
-
 export const samplePlugin =
   (pluginOptions: PluginTypes) =>
   (incomingConfig: Config): Config => {
     let config = { ...incomingConfig }
-
-    // If the plugin is disabled, return the config without modifying it
-    if (pluginOptions.enabled === false) {
-      return config
-    }
-
-    // Add additional collections here
-    config.collections = [
-      ...(config.collections || []),
-      // Add additional collections here
-    ]
 
     // If you need to add a webpack alias, use this function to extend the webpack config
     const webpack = extendWebpackConfig(incomingConfig)
@@ -37,6 +20,23 @@ export const samplePlugin =
 
       // Add additional admin config here
     }
+
+    // If the plugin is disabled, return the config without modifying it
+    // The order of this check is important, we still want any webpack extensions to be applied even if the plugin is disabled
+    if (pluginOptions.enabled === false) {
+      return config
+    }
+
+    // Add additional collections here
+    config.collections = [
+      ...(config.collections || []),
+      // Add additional collections here
+    ]
+
+    config.globals = [
+      ...(config.globals || []),
+      // Add additional globals here
+    ]
 
     config.hooks = {
       ...(incomingConfig.hooks || {}),

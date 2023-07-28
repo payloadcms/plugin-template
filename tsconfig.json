@@ -13,13 +13,14 @@
     "strict": true,
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "dev/**/*",
+    "jest.config.js",
   ],
   "exclude": [
     "dist",
     "build",
-    "tests",
     "node_modules",
-    "**/*.test.ts"
+    "**/*.spec.ts",
   ]
 }
