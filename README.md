@@ -42,13 +42,13 @@ The initialization process goes in the following order:
 
 ## Building the Plugin
 
-When you build a plugin, you are purely building a feature for your project and then abstracting it outside of the project. 
+When you build a plugin, you are purely building a feature for your project and then abstracting it outside of the project.
 
 ### Template Files
 
  In the [payload-plugin-template](https://github.com/payloadcms/payload-plugin-template), you will see a common file structure that is used across all plugins:
 
-1. root folder 
+1. root folder
 2. /src folder
 3. /dev folder
 
@@ -64,15 +64,15 @@ In the root folder, you will see various files that relate to the configuration 
 * .**prettierrc**.js - Configuration for Prettier code formatting.
 * **jest**.**config**.js -  Configures testing settings with Jest.
 * **LICENSE** - As part of the open-source community, we ship all plugins with an MIT license but it is not required.
-* **tsconfig**.json - Configures the compiler options for TypeScript 
+* **tsconfig**.json - Configures the compiler options for TypeScript
 
-**IMPORTANT***: You will need to modify these files. 
+**IMPORTANT***: You will need to modify these files.
 
-#### Dev 
+#### Dev
 
 In the dev folder, you’ll find a basic payload project, created with `npx create-payload-app` and the blank template.
 
-The `samplePlugin` has already been installed to the `payload.config()` file in this project. 
+The `samplePlugin` has already been installed to the `payload.config()` file in this project.
 
 ```ts
 plugins: [
@@ -100,7 +100,7 @@ First up, the `index.ts` file. It is best practice not to build the plugin direc
 
 **Plugin.ts**
 
-To reiterate, the essence of a payload plugin is simply to extend the payload config - and that is exactly what we are doing in this file. 
+To reiterate, the essence of a payload plugin is simply to extend the payload config - and that is exactly what we are doing in this file.
 
 ```ts
 export const samplePlugin =
@@ -119,13 +119,13 @@ First, we receive the existing payload config along with any plugin options.
 
 Then we set the variable `config` to be equal to the existing config.
 
-From here, you can extend the config as you wish. 
+From here, you can extend the config as you wish.
 
 Finally, you return the config and that is it!
 
 ##### Spread Syntax
 
-Spread syntax (or the spread operator) is a feature in JavaScript that uses the dot notation **(...)** to spread elements from arrays, strings, or objects into various contexts. 
+Spread syntax (or the spread operator) is a feature in JavaScript that uses the dot notation **(...)** to spread elements from arrays, strings, or objects into various contexts.
 
 We are going to use spread syntax to allow us to add data to existing arrays without losing the existing data. It is crucial to spread the existing data correctly – else this can cause adverse behavior and conflicts with Payload config and other plugins.
 
@@ -140,7 +140,7 @@ config.collections = [
 
 First we spread the `config.collections` to ensure that we don’t lose the existing collections, then you can add any additional collections just as you would in a regular payload config.
 
-This same logic is applied to other properties like admin, hooks, globals: 
+This same logic is applied to other properties like admin, hooks, globals:
 
 ```ts
 config.globals = [
@@ -172,7 +172,7 @@ In the template, we have stubbed out a basic `onInitExtension` file that you can
 
 If your plugin uses packages or dependencies that are not browser compatible (fs, stripe, nodemailer, etc), you will need to add them to the webpack property to prevent getting errors in build.
 
-Webpack is another part of the payload.config that will be a little more tricky to extend, because we need to carefully pass the existing webpack data to multiple places. 
+Webpack is another part of the payload.config that will be a little more tricky to extend, because we need to carefully pass the existing webpack data to multiple places.
 
 To simplify this, the template includes a `webpack.ts` file which takes care of spreading the existing webpack, so you can just add your new stuff:
 
@@ -209,11 +209,11 @@ export interface PluginTypes {
 
 If possible, include JSDoc comments to describe the options and their types. This allows a developer to see details about the options in their editor.
 
-##### Testing 
+##### Testing
 
-Having a test suite for your plugin is essential to ensure quality and stability. Jest is a popular testing framework, widely used for testing JavaScript and particularly for applications built with React. 
+Having a test suite for your plugin is essential to ensure quality and stability. Jest is a popular testing framework, widely used for testing JavaScript and particularly for applications built with React.
 
-Jest organizes tests into test suites and cases. We recommend creating individual tests based on the expected behavior of your plugin from start to finish. 
+Jest organizes tests into test suites and cases. We recommend creating individual tests based on the expected behavior of your plugin from start to finish.
 
 Writing tests with Jest is very straightforward and you can learn more about how it works in the [Jest documentation.](https://jestjs.io/)
 
@@ -233,12 +233,14 @@ describe('plugin', () => {
 
 ## Best practices
 
-With this tutorial and the `payload-plugin-template`, you should have everything you need to start building your own plugin. 
+With this tutorial and the `payload-plugin-template`, you should have everything you need to start building your own plugin.
 In addition to the setup, here are other best practices aim we follow:
 
 * **Providing an enable / disable option:** For a better user experience, provide a way to disable the plugin without uninstalling it. This is especially important if your plugin adds additional webpack aliases, this will allow you to still let the webpack run to prevent errors.
 * **Include tests in your GitHub CI workflow**: If you’ve configured tests for your package, integrate them into your workflow to run the tests each time you commit to the plugin repository. Learn more about [how to configure tests into your GitHub CI workflow.](https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs)
 * **Publish your finished plugin to NPM**: The best way to share and allow others to use your plugin once it is complete is to publish an NPM package. This process is straightforward and well documented, find out more [creating and publishing a NPM package here.](https://docs.npmjs.com/creating-and-publishing-scoped-public-packages/).
+* **Add payload-plugin topic tag**: Apply the tag **payload-plugin **to your GitHub repository. This will boost the visibility of your plugin and ensure it gets listed with [existing payload plugins](https://github.com/topics/payload-plugin).
+* **Use [Semantic Versioning](https://semver.org/) (SemVar)** - With the SemVar system you release version numbers that reflect the nature of changes (major, minor, patch). Ensure all major versions reference their Payload compatibility.
 
 # Questions
 Please contact [Payload](mailto:dev@payloadcms.com) with any questions about using this plugin template.

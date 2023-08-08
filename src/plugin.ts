@@ -3,6 +3,7 @@ import type { Config } from 'payload/config'
 import { onInitExtension } from './onInitExtension'
 import type { PluginTypes } from './types'
 import { extendWebpackConfig } from './webpack'
+import AfterDashboard from './components/AfterDashboard'
 
 export const samplePlugin =
   (pluginOptions: PluginTypes) =>
@@ -19,6 +20,15 @@ export const samplePlugin =
       webpack,
 
       // Add additional admin config here
+
+      components: {
+        ...(config.admin?.components || {}),
+        // Add additional admin components here
+        afterDashboard: [
+          ...(config.admin?.components?.afterDashboard || []),
+          AfterDashboard,
+        ],
+      },
     }
 
     // If the plugin is disabled, return the config without modifying it
@@ -27,10 +37,22 @@ export const samplePlugin =
       return config
     }
 
-    // Add additional collections here
     config.collections = [
       ...(config.collections || []),
       // Add additional collections here
+    ]
+
+    config.endpoints = [
+      ...(config.endpoints || []),
+      {
+        path: '/custom-endpoint',
+        method: 'get',
+        root: true,
+        handler: (req, res): void => {
+          res.json({ message: 'Here is a custom endpoint' });
+        },
+      },
+      // Add additional endpoints here
     ]
 
     config.globals = [
