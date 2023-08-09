@@ -63,7 +63,7 @@ export const samplePlugin =
     ]
 
     config.hooks = {
-      ...(incomingConfig.hooks || {}),
+      ...(config.hooks || {}),
       // Add additional hooks here
     }
 
