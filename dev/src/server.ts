@@ -1,28 +1,37 @@
-import express from 'express';
-import payload from 'payload';
+import express from 'express'
+import type { Server } from 'http'
+import payload from 'payload'
+import path from 'path'
 
-require('dotenv').config();
-const app = express();
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+
+const app = express()
 
 // Redirect root to Admin panel
 app.get('/', (_, res) => {
-  res.redirect('/admin');
-});
+  res.redirect('/admin')
+})
 
-const start = async () => {
-  // Initialize Payload
+export const start = async (args: { local: boolean } = { local: false }): Promise<Server> => {
+  const { local } = args
   await payload.init({
+    local,
     secret: process.env.PAYLOAD_SECRET || '',
     mongoURL: process.env.MONGODB_URI || '',
     express: app,
-    onInit: async () => {
-      payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
+  })
+
+  await payload.create({
+    collection: 'newCollection',
+    data: {
+      title: 'Seeded title',
     },
   })
 
-  // Add your own express routes here
-
-  app.listen(3000);
+  return app.listen(3000)
 }
 
-start();
+// when build.js is launched directly
+if (module.id === require.main?.id) {
+  start()
+}
