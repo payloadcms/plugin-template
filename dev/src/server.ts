@@ -2,6 +2,7 @@ import express from 'express'
 import type { Server } from 'http'
 import payload from 'payload'
 import path from 'path'
+import { seed } from './seed'
 
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
 
@@ -21,12 +22,10 @@ export const start = async (args: { local: boolean } = { local: false }): Promis
     express: app,
   })
 
-  await payload.create({
-    collection: 'newCollection',
-    data: {
-      title: 'Seeded title',
-    },
-  })
+
+  if (process.env.PAYLOAD_SEED === 'true') {
+    await seed(payload)
+  }
 
   return app.listen(3000)
 }

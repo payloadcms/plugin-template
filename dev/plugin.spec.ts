@@ -23,7 +23,7 @@ describe('Plugin tests', () => {
   // Example test to check for seeded data
   it('seeds data accordingly', async () => {
     const newCollectionQuery = await payload.find({
-      collection: 'newCollection',
+      collection: 'new-collection',
       sort: 'createdAt',
     })
 
