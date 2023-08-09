@@ -4,6 +4,7 @@ import { onInitExtension } from './onInitExtension'
 import type { PluginTypes } from './types'
 import { extendWebpackConfig } from './webpack'
 import AfterDashboard from './components/AfterDashboard'
+import newCollection from './newCollection'
 
 export const samplePlugin =
   (pluginOptions: PluginTypes) =>
@@ -40,6 +41,7 @@ export const samplePlugin =
     config.collections = [
       ...(config.collections || []),
       // Add additional collections here
+      newCollection, // delete this line to remove the example collection
     ]
 
     config.endpoints = [

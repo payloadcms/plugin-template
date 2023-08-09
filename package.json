@@ -16,11 +16,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "cd dev && yarn test",
     "lint": "eslint src",
     "lint:fix": "eslint --fix --ext .ts,.tsx src",
     "clean": "rimraf dist && rimraf dev/yarn.lock",
-    "prepublishOnly": "yarn clean && yarn build && yarn test"
+    "prepublishOnly": "yarn clean && yarn build && cd dev && yarn test"
   },
   "author": "dev@payloadcms.com",
   "license": "MIT",
@@ -29,14 +29,17 @@
   },
   "devDependencies": {
     "@payloadcms/eslint-config": "^0.0.1",
-    "@types/jest": "^29.5.3",
+    "@typescript-eslint/eslint-plugin": "5.12.1",
+    "@typescript-eslint/parser": "5.12.1",
     "dotenv": "^8.2.0",
     "eslint": "^8.19.0",
-    "jest": "^27.0.6",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "^4.0.0",
     "payload": "^1.8.2",
     "prettier": "^2.7.1",
     "react": "^18.0.0",
-    "ts-jest": "^27.0.4",
     "typescript": "^4.8.4"
   }
 }

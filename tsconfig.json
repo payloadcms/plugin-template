@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "target": "es5",
     "outDir": "./dist",
     "allowJs": true,
@@ -14,13 +19,5 @@
   },
   "include": [
     "src/**/*",
-    "dev/**/*",
-    "jest.config.js",
   ],
-  "exclude": [
-    "dist",
-    "build",
-    "node_modules",
-    "**/*.spec.ts",
-  ]
 }

@@ -62,7 +62,6 @@ In the root folder, you will see various files that relate to the configuration 
 * .**eslintrc**.js - Eslint configuration for reporting on problematic patterns.
 * .**gitignore** - List specific untracked files to omit from Git.
 * .**prettierrc**.js - Configuration for Prettier code formatting.
-* **jest**.**config**.js -  Configures testing settings with Jest.
 * **LICENSE** - As part of the open-source community, we ship all plugins with an MIT license but it is not required.
 * **tsconfig**.json - Configures the compiler options for TypeScript
 
@@ -217,16 +216,14 @@ Jest organizes tests into test suites and cases. We recommend creating individua
 
 Writing tests with Jest is very straightforward and you can learn more about how it works in the [Jest documentation.](https://jestjs.io/)
 
-For this template, we stubbed out a plugin.spec.ts where you can write your tests.
+For this template, we stubbed out `plugin.spec.ts` in the `dev` folder where you can write your tests.
 
 ```ts
-describe('plugin', () => {
-  // Create tests to ensure expected behaviour from the plugin
-  it('should run the plugin', () => {
-    const runPlugin = samplePlugin({ enabled: true })
-    const config = runPlugin(createConfig())
-
-    assertPluginRan(config)
+describe('Plugin tests', () => {
+  // Create tests to ensure expected behavior from the plugin
+  it('some condition that must be met', () => {
+   // Write your test logic here
+   expect(...)
   })
 })
 ```
