@@ -7,14 +7,12 @@ const baseClass = 'after-dashboard';
 const AfterDashboard: React.FC = () => {
   return (
     <div className={baseClass}>
-      <h4>You are viewing the plugin template.</h4>
-      <p>
-        Here is a custom component added from within the plugin.
-        <br />
-        You can find the code for this component in <code>src/components/afterDashboard</code>.
-      </p>
+      <h4>This component was added by the plugin</h4>
+      <h5>
+        Find it here: <code>src/components/afterDashboard</code>
+      </h5>
     </div>
-  );
+  )
 };
 
 export default AfterDashboard;

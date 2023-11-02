@@ -7,7 +7,7 @@ Payload is built with a robust infrastructure intended to support Plugins with e
 To build your own Payload plugin, all you need is:
 
 * An understanding of the basic Payload concepts
-* And some JavaScript experience
+* And some JavaScript/Typescript experience
 
 ## Background
 
@@ -24,7 +24,7 @@ export const config = buildConfig({
   plugins: [
     // You can pass options to the plugin
     samplePlugin({
-		enabled: true,
+		  enabled: true,
     }),
   ]
 });
@@ -46,7 +46,7 @@ When you build a plugin, you are purely building a feature for your project and 
 
 ### Template Files
 
- In the [payload-plugin-template](https://github.com/payloadcms/payload-plugin-template), you will see a common file structure that is used across all plugins:
+In the [payload-plugin-template](https://github.com/payloadcms/payload-plugin-template), you will see a common file structure that is used across all plugins:
 
 1. root folder
 2. /src folder
@@ -75,9 +75,9 @@ The `samplePlugin` has already been installed to the `payload.config()` file in 
 
 ```ts
 plugins: [
-    samplePlugin({
-      enabled: false,
-    })
+  samplePlugin({
+    enabled: false,
+  })
 ]
 ```
 
@@ -95,7 +95,7 @@ Now that we have our environment setup and we have a dev project ready to - itâ€
 
 **index.ts**
 
-First up, the `index.ts` file. It is best practice not to build the plugin directly in this file, instead we use this to export the plugin and types from separate files.
+First up, the `src/index.ts` file. It is best practice not to build the plugin directly in this file, instead we use this to export the plugin and types from separate files.
 
 **Plugin.ts**
 
@@ -104,13 +104,13 @@ To reiterate, the essence of a payload plugin is simply to extend the payload co
 ```ts
 export const samplePlugin =
   (pluginOptions: PluginTypes) =>
-  (incomingConfig: Config): Config => {
-    let config = { ...incomingConfig }
+    (incomingConfig: Config): Config => {
+      let config = { ...incomingConfig }
 
-   // do something cool with the config here
+      // do something cool with the config here
 
-    return config
-  }
+      return config
+    }
 
 ```
 
@@ -156,9 +156,11 @@ config.hooks = {
 Some properties will be slightly different to extend, for instance the onInit property:
 
 ```ts
+import { onInitExtension } from './onInitExtension' // example file
+
 config.onInit = async payload => {
   if (incomingConfig.onInit) await incomingConfig.onInit(payload)
-  // Add additional onInit code by using the onInitExtension function
+  // Add additional onInit code by defining an onInitExtension function
   onInitExtension(pluginOptions, payload)
 }
 ```
@@ -167,30 +169,11 @@ If you wish to add to the onInit, you must include the async/await. We donâ€™t u
 
 In the template, we have stubbed out a basic `onInitExtension` file that you can use, if not needed feel free to delete it.
 
-##### Webpack
+##### File Aliasing
 
-If your plugin uses packages or dependencies that are not browser compatible (fs, stripe, nodemailer, etc), you will need to add them to the webpack property to prevent getting errors in build.
+If your plugin uses packages or dependencies that are not browser compatible (fs, stripe, nodemailer, etc), you will need to alias them using your bundler to prevent getting errors in build.
 
-Webpack is another part of the payload.config that will be a little more tricky to extend, because we need to carefully pass the existing webpack data to multiple places.
-
-To simplify this, the template includes a `webpack.ts` file which takes care of spreading the existing webpack, so you can just add your new stuff:
-
-```ts
-const newWebpack = {
-  ...existingWebpackConfig,
-  resolve: {
-    ...(existingWebpackConfig.resolve || {}),
-    alias: {
-      ...(existingWebpackConfig.resolve?.alias ? existingWebpackConfig.resolve.alias : {}),
-      // Add additional aliases here like so:
-      [path.resolve(__dirname, './yourFileHere')]: mockModulePath,
-    },
-  },
-}
-
-```
-
-You can use the alias Webpack feature to tell Webpack to avoid importing the files or modules you want to restrict to server-only.
+You can read more about aliasing files with Webpack or Vite in the [excluding server modules](https://payloadcms.com/docs/admin/excluding-server-code#aliasing-server-only-modules) docs.
 
 ##### Types.ts
 
