@@ -18,6 +18,7 @@ export const start = async (args?: Partial<InitOptions>) => {
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`)
     },
+    ...(args || {}),
   })
 
   // Add your own express routes here
