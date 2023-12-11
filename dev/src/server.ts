@@ -1,5 +1,6 @@
 import express from 'express'
 import payload from 'payload'
+import { InitOptions } from 'payload/config'
 
 require('dotenv').config()
 const app = express()
@@ -9,7 +10,7 @@ app.get('/', (_, res) => {
   res.redirect('/admin')
 })
 
-const start = async () => {
+export const start = async (args?: Partial<InitOptions>) => {
   // Initialize Payload
   await payload.init({
     secret: process.env.PAYLOAD_SECRET,

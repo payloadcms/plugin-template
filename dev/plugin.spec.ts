@@ -2,14 +2,12 @@ import type { Server } from 'http'
 import mongoose from 'mongoose'
 import payload from 'payload'
 import { start } from './src/server'
-import { NewCollectionTypes } from '../src/types'
 
 describe('Plugin tests', () => {
   let server: Server
-  let newCollection: NewCollectionTypes[]
 
   beforeAll(async () => {
-    server = await start({ local: true })
+    await start({ local: true })
   })
 
   afterAll(async () => {
@@ -26,8 +24,6 @@ describe('Plugin tests', () => {
       collection: 'new-collection',
       sort: 'createdAt',
     })
-
-    newCollection = newCollectionQuery.docs
 
     expect(newCollectionQuery.totalDocs).toEqual(1)
   })
