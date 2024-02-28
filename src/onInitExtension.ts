@@ -11,6 +11,6 @@ export const onInitExtension = (pluginOptions: PluginTypes, payload: Payload): v
     // You can use the existing express app here to add middleware, routes, etc.
     // app.use(...)
   } catch (err: unknown) {
-    payload.logger(err)
+    payload.logger.error(err)
   }
 }
