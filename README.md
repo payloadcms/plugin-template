@@ -89,6 +89,8 @@ When you’re ready to start development, navigate into this folder with `cd dev
 
 And then start the project with `yarn dev` and pull up [http://localhost:3000/](http://localhost:3000/) in your browser.
 
+Use `dev@payloadcms.com` and `test` to login. The default credentials can be found, and be adjusted in `/dev/helpers/credentials.ts`.
+
 #### Src
 
 Now that we have our environment setup and we have a dev project ready to - it’s time to build the plugin!
