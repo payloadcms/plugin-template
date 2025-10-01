@@ -1,3 +1,15 @@
+> [!WARNING]
+> ## This Repository is Deprecated and No Longer Maintained
+>
+> The plugin template has been moved to the main Payload repository to centralize maintenance and ensure it is always up-to-date.
+>
+> **You can find the current version here:**
+> ### **https://github.com/payloadcms/payload/tree/main/templates/plugin**
+>
+> Please use the template from the monorepo for any new projects.
+
+---
+
 # Payload Plugin Template
 
 A template repo to create a [Payload CMS](https://payloadcms.com) plugin.
